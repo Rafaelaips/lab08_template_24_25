@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class ShoppingCartController {
     private ShoppingCart cart;
+    private Caretaker caretaker;
 
     public ShoppingCartController() {
         cart = new ShoppingCart();
@@ -12,20 +13,21 @@ public class ShoppingCartController {
     }
 
     public void addProduct(String name, double cost) {
+        caretaker.saveState();
 
         Product p = new Product(name, cost);
         cart.addProduct(p);
     }
 
     public void reset() {
-
+        caretaker.saveState();
         cart.reset();
     }
 
     public void removeProduct(String name) {
+        caretaker.saveState();
         for (Product p : cart.getProducts())
             if (p.getName().equals(name)) {
-
                 cart.removeProduct(p);
                 return;
             }
@@ -34,7 +36,8 @@ public class ShoppingCartController {
 
 
     public void undo() throws NoMementoException {
-        //complete
+        caretaker.restoreState();
+        System.out.println("Undo feito com sucesso!");
     }
 
     public Collection<Product> getProducts() {

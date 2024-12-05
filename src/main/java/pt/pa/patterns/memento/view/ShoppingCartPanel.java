@@ -15,6 +15,7 @@ public class ShoppingCartPanel {
     private ShoppingCartController shoppingCartController;
     private ListView<Product> listViewCartContents;
 
+    private Button buttonReset;
     private Button buttonUndo;
     private GridPane gridPaneMain;
     private Button buttonAddProduct;
@@ -41,6 +42,7 @@ public class ShoppingCartPanel {
         textFieldPrice = new TextField();
         gridPaneAddProduct.add(textFieldPrice, 1, 2);
         HBox hBoxAddProductButtons = new HBox();
+
         buttonAddProduct = new Button("Add");
         hBoxAddProductButtons.getChildren().add(buttonAddProduct);
         hBoxAddProductButtons.setAlignment(Pos.CENTER_RIGHT);
@@ -65,6 +67,16 @@ public class ShoppingCartPanel {
         hBoxUndo.setStyle("-fx-padding: 2px 0 0 0");
         gridPaneCartContents.add(hBoxUndo, 0, 2);
         GridPane.setHgrow(listViewCartContents, Priority.ALWAYS);
+
+
+        buttonReset= new Button("Reset");
+        HBox hBoxReset = new HBox();
+        hBoxReset.getChildren().add(buttonReset);
+        hBoxReset.setAlignment(Pos.CENTER_RIGHT);
+        hBoxReset.setStyle("-fx-padding: 2px 0 0 0");
+        gridPaneCartContents.add(hBoxReset, 0, 3);
+        GridPane.setHgrow(listViewCartContents, Priority.ALWAYS);
+
 
         setTriggers();
 
@@ -94,7 +106,17 @@ public class ShoppingCartPanel {
                 }
             }
         });
+/*
+        buttonUndo.setOnAction(e-> {
+            shoppingCartController.undo();
+            updateProductCartList();
 
+        });
+
+        buttonReset.setOnAction(e-> {
+
+        });
+*/
     }
 
     private void cleanInput() {
